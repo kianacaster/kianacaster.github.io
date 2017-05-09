@@ -5,20 +5,26 @@
 		 
 		 <style>
 		 h1 {
-			text-align : center;
+			font-size: 95px;
+			text-align: center;
+			font-family: "Berlin Sans fb";
+			border-style: groove;
+			border-width: 5px;
+			border-radius: 100px;
+			background: #43EEBB;
+			color: #440077;
 		 }
 
 		 #selection { 
 			text-align : center;
 		 }
 		 </style>
-		     <body bgcolor = #ff0000>
-				<font color='#002255' size='5px'><h1><u>Welcome</u></h1></font>
-
+		     <body style="background-image:url(bgimage.jpg)">
+				<h1>Welcome</h1>
 			    <div id="selection">
 				<form name="pageselect">
 				<select name="menu" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">
-				<option selected="selected" value="homepage.html">Change Page</option>
+				<option selected="selected" value="index.html">Change Page</option>
 				<option value="charitygame/index.html">Charity Game</option>
 				<option value="Drawing App/index.html">Online Whiteboard</option>
 				</form>	
