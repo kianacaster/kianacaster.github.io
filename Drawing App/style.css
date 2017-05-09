@@ -1,0 +1,19 @@
+#mh {
+	font-size: 95px;
+	text-align: center;
+	font-family: "Berlin Sans fb";
+	border-style: groove;
+	border-width: 5px;
+	background: #441122;
+}
+
+#he {
+	font-size: 30px;
+	position: relative;
+	top: -75px;
+	text-align: center;
+	font-family: "Berlin Sans fb";
+	border-style: groove;
+	border-width: 3px;
+	background: #331133;
+}
