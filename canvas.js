@@ -53,7 +53,7 @@ function animate(){
 		}, speed)}
 	);
 	
-	c.fillStyle = "rgba(0,0,0,0.05)";
+	c.fillStyle = "rgba(100,0,0,0.05)";
 	c.fillRect(0,0,width,height);
 	r = floor(random(155,255));
 	g = floor(random(155,200));
