@@ -9,7 +9,7 @@ var speed = 50;
 var r = 255;
 var g = 0;
 var b = 0;
-var a = 0.01;
+var a = 0.006;
 var emitters = [];
 
 function Emitter(x,y){
@@ -41,14 +41,19 @@ function Particle(x,y,w,h){
 }
 
 window.onload = function(){
-	//emitter = new Emitter(width / 2, height / 2);
-	for(var i = 0; i < 4; i++){
+	for(var i = 0; i < 5; i++){
 		emitters.push(new Emitter(random(width), random(height)));
 	}
 }
+
 function animate(){
-	requestAnimationFrame(function(){setTimeout(function(){animate()}, speed)});
-	c.fillStyle = "#000000";
+	requestAnimationFrame(function(){
+		setTimeout(function(){
+			animate();
+		}, speed)}
+	);
+	
+	c.fillStyle = "rgba(0,0,0,0.05)";
 	c.fillRect(0,0,width,height);
 	r = floor(random(155,255));
 	g = floor(random(155,200));
@@ -61,14 +66,14 @@ function animate(){
 		}
 	}
 	for(var i = 0 ; i < emitters.length - 1; i++){
-		if(emitters[i].x > width || emitters[i].x < 0){
+		if(emitters[i].x + 20 > width || emitters[i].x < 0){
 			emitters[i].dx = invert(emitters[i].dx);
 		}
-		if(emitters[i].y > height || emitters[i].y < 0){
+		if(emitters[i].y + 20 > height || emitters[i].y < 0){
 			emitters[i].dy = invert(emitters[i].dy);
 		}
-		emitters[i].x += 20*emitters[i].dx;
-		emitters[i].y += floor(random(10,20))*emitters[i].dy;
+		emitters[i].x += 20 * emitters[i].dx;
+		emitters[i].y += floor(random(10,20)) * emitters[i].dy;
 		emitters[i].update();
 	}
 }	
