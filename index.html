@@ -2,25 +2,43 @@
 <html>			
    <head>
 	     <title>Homepage</title>
-		 
+		 <script language="javascript" type="text/javascript" src="usefulFunctions.js"></script>
 		 <style>
 		 h1 {
 			font-size: 95px;
-			text-align: center;
 			font-family: "Berlin Sans fb";
-			border-style: groove;
-			border-width: 5px;
-			border-radius: 100px;
-			background: #43EEBB;
 			color: #440077;
 		 }
+		#container
+		{
+		  height: 400px;
+		  position: relative;
+		  width: 400px;
+		}
+		
+		#msg
+		{
+			top: 0vh;
+			left: 100%;
+			position: absolute;
+			width: 100%;
+		}
+		
+		#selection{
+			top: 35vh;
+			left: 130%;
+			position: absolute;
+			width: 100%;
+		}
 
-		 #selection { 
-			text-align : center;
-		 }
 		 </style>
-		     <body style="background-image:url(bgimage.jpg)">
-				<h1>Welcome</h1>
+		     <body bgcolor="#000000">
+			 <div id="container">
+				<h1 id="msg">Welcome</h1>
+				<canvas id="canvas"></canvas>
+			
+				
+				<script language="javascript" type="text/javascript" src="canvas.js"></script>
 			    <div id="selection">
 				<form name="pageselect">
 				<select name="menu" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">
@@ -29,7 +47,7 @@
 				<option value="Drawing App/index.html">Online Whiteboard</option>
 				</form>	
 			    </div>				  
-		
+		</div>
 				
 								
       </body>
