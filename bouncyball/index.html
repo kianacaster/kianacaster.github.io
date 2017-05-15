@@ -1,15 +1,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
-  <script language="javascript" type="text/javascript" src="sketch.js"></script>
-  <script language="javascript" type="text/javascript"> document.addEventListener('contextmenu', event => event.preventDefault());</script>
-
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 10; margin: 10;} </style>
-</head>
-
+  <style>
+  canvas{
+	border: 1px solid black;
+  }
+  </style>
+  <script language="javascript" type="text/javascript" src="usefulFunctions.js"></script>
+  </head>
 <body>
-<p>This is a simple bouncy ball demo, showing off simple movement in JavaScript. This would be useful for a game like Pong, where there are no real physics involved. To make the code simpler, this uses p5.js - but is easily done natively.</p>
+	<canvas></canvas>
+	<script language="javascript" type="text/javascript" src="canvas.js"></script>
 </body>
 </html>
