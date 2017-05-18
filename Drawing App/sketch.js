@@ -118,14 +118,12 @@ function draw() {
 	line(0,ch,0,0);
 	if(mouseIsPressed){
 		if(mouseButton == LEFT){
-		data.button = "LEFT"
 		lastX = mouseX;
 		lastY = mouseY;
 		drawLine(startX,startY,lastX,lastY, clr, drawThickness);
 		startX = mouseX;
 		startY = mouseY;
 		}else if(mouseButton == RIGHT){
-			data.button = "RIGHT"
 			lastX = mouseX;
 			lastY = mouseY;
 			drawLine(startX,startY,lastX,lastY, bgcolour, rubThickness);
