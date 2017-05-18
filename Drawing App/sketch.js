@@ -36,8 +36,6 @@ var updbgc;
 var data;
 
 function setup() {
-	socket = io.connect("http://localhost:3000");
-	socket.on("drawing", newDrawing);
 	params = getURLParams();
 	cw = params.width;
 	ch = params.height;
@@ -113,14 +111,12 @@ function restore(){
 
 // 	If the mouse is pressed draw a line from the start coordinates to the end coordinates - left mouse draws black, right mouse draws white (illusion of an eraser)
 function draw() {
-	data = { x: mouseX, y: mouseY, pressed: mouseIsPressed, button: mouseButton }
 	strokeWeight(5);
 	stroke(0);
 	line(0,0,cw,0);
 	line(cw,0,cw,ch);
 	line(0,ch,cw,ch);
 	line(0,ch,0,0);
-	socket.emit("mouse", data);
 	if(mouseIsPressed){
 		if(mouseButton == LEFT){
 		data.button = "LEFT"
@@ -141,31 +137,6 @@ function draw() {
 		startX = mouseX;
 		startY = mouseY;
 	}
-}
-function newDrawing(){
-	var dstartX;
-	var dstartY;
-	var dlastX;
-	var dlastY;
-	if(data.pressed = true){
-		if(data.button == "LEFT"){
-		dlastX = data.x;
-		dlastY = data.y;
-		drawLine(dstartX,dstartY,dlastX,dlastY, clr, drawThickness);
-		dstartX = data.x;
-		dstartY = data.y;
-		}else if(data.button == "RIGHT"){
-			dlastX = data.x;
-			dlastY = data.y;
-			drawLine(dstartX,dstartY,dlastX,dlastY, bgcolour, rubThickness);
-			dstartX = data.x;
-			dstartY = data.y;	
-		}
-	}else{
-		dstartX = data.x;
-		dstartY = data.y;
-	}
-
 }
 // Draws a line
 function drawLine(x1,y1,x2,y2,colour, thickness){ 
