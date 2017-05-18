@@ -1,7 +1,6 @@
 // Basic Drawing Web-page - created by K14N \\
 
 // Setup variables
-var socket;
 var bgcolour = 255; // Sets the background colour to white
 var fr = 120; // Frame rate = 120
 var clr = 0; // Colour is black
