@@ -12,7 +12,7 @@ c.fillRect(0,0,width,height);
 var distance = 10;
 var canchane = true;
 var p = document.getElementById("incval");
-
+var prev;
 slider.onchange = function(){
 	if(canchange){
 		c.fillStyle = "#000000";
@@ -20,6 +20,7 @@ slider.onchange = function(){
 		circles.push(new Circle(width / 1.5));
 		distance = slider.value;
 		canchange = false;
+		prev = slider.value;
 	}
 }
 
@@ -54,6 +55,11 @@ function animate(){
 			canchange = true;
 			break;
 		}
+	}
+	
+	if(canchange && slider.value !== prev){
+		distance = slider.value;
+		slider.onchange();
 	}
 }	
 animate();
