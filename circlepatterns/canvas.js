@@ -12,7 +12,7 @@ c.fillRect(0,0,width,height);
 var distance = 10;
 var canchane = true;
 var p = document.getElementById("incval");
-var prev;
+var prev = 10;
 slider.onchange = function(){
 	if(canchange){
 		c.fillStyle = "#000000";
