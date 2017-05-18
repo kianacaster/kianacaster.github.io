@@ -1,4 +1,4 @@
-// Basic Drawing Web-page - created by K14N \\
+// Basic Drawing Web-page - created by Kian Acaster \\
 
 // Setup variables
 var bgcolour = 255; // Sets the background colour to white
