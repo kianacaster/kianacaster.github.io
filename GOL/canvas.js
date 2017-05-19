@@ -4,14 +4,14 @@ var width = 600;
 var height = 600;
 canvas.width = width;
 canvas.height = height;
-var speed = 0;
+var speed = 20;
 var w;
 var columns;
 var rows;
 var board;
 var next;
 
-w = 3;
+w = 8;
 columns = floor(width/  w);
 rows = floor(height / w);
 board = new Array(columns);
