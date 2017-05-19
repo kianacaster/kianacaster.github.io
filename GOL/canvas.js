@@ -11,7 +11,7 @@ var rows;
 var board;
 var next;
 
-w = 10;
+w = 20;
 columns = floor(width/  w);
 rows = floor(height / w);
 board = new Array(columns);
