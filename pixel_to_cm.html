@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Conversion</title>
+</head>
+<body bgcolor = #332211>
+   <form id="conversions" name="conversions">
+
+  <br><br><br>    
+    <div class="wrapper">
+        <font size="5px" color=#9999FF><p id="cvalue">Centimetre value :</p><br></font>
+  <input type="text" name="cmvalue" id="cmvalue">
+        <input type="button" name="convertcm" id="convertcm" value="Convert Centimetres to Pixels">
+    <br><br><br><br>
+    </div>
+    <div class="wrapper">
+        <font size="5px" color=#9999FF><p id="pvalue">Pixel value :</p></font>    
+         <input type="text" name="pxvalue" id="pxvalue">
+        <input type="button" name="convertpx" id="convertpx" value="Convert Pixels to Centimetres"><br>
+    </div>
+  <br><br>
+  <br><br><br><br><br><br>
+
+  </form>
+ 
+     <style type="text/css">
+	 #cvalue, #pvalue {
+		font-family : "Papyrus";
+	 
+	 
+	 }
+     .wrapper {
+        text-align: center;
+
+     }
+     #convertcm {
+        height : 30px;
+        width:250px;
+        text-align : center;
+    }      
+
+    #convertpx {
+        height : 30px;
+        width:250px;
+        text-align : center;
+     }
+    #output {
+        width:400px;
+        margin : auto 0;
+        text-align: center;
+    }
+     </style>
+	<script>
+    var form = document.getElementById("conversions"); // Gets a reference to the form element. 
+    var strcmvalue = form.elements["cmvalue"]; // Gets a reference to the element in the form with the name "cmvalue".
+    var strpxvalue = form.elements["pxvalue"]; // Gets a reference to the element in the form with the name "pxvalue".
+  
+    var ccmbutton = document.getElementById("convertcm").onclick = function() // Declares a variable to have a functional value that's run by a button press (the button is referenced in the code).
+    {   
+    var num = parseFloat(strcmvalue.value, 10); // Parses the string 'strcmvalue' as a float (base 10).
+
+    cm_to_pixel_conversion(num); // Runs the function 'cm_to_pixel_conversion', passing it the parameter of num (the float value).
+    }
+
+    var cpxbutton = document.getElementById("convertpx").onclick = function() // Pretty much the same as the one before except with different values.
+    {
+    var num = parseFloat(strpxvalue.value, 10); 
+    pixel_to_cm_conversion(num);
+    }
+
+    var cm_per_pixel = 0.026458333; // A variable set to the value of Centimeters per pixel.
+    var px_per_cm = 37.795275591; // A variable set to the value of Pixels per Centimeters.
+
+    function pixel_to_cm_conversion(pvalue) // This function is run when the cpxbutton is pressed.
+    {
+        strcmvalue.value = null; // Clears the textbox of the Centimeter value.
+        cmconversion = pvalue / px_per_cm; // Works out the equvialent cm value from the pixel value.
+        strcmvalue.value = cmconversion.toString().substring(0,20) + "cm"; // Sets the cmvalue text box to have a value of cmconversion (the conversion result) with a substring of 15.
+      
+   }
+
+    function cm_to_pixel_conversion(cvalue) // Same as before, just the other way round.
+    {
+        strpxvalue.value = null;
+        pxconversion = cvalue / cm_per_pixel;
+        strpxvalue.value = pxconversion.toString().substring(0,20) + "px";
+    }
+	</script>	
+	</body>
+</html>
