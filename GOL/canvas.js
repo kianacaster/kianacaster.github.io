@@ -4,7 +4,7 @@ var width = 600;
 var height = 600;
 canvas.width = width;
 canvas.height = height;
-var speed = 200;
+var speed = 0;
 var w;
 var columns;
 var rows;
