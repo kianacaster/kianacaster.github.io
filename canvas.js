@@ -9,7 +9,7 @@ var speed = 50;
 var r = 255;
 var g = 0;
 var b = 0;
-var a = 0.006;
+var a = 0.7;
 var emitters = [];
 
 function Emitter(x,y){
