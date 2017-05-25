@@ -9,7 +9,7 @@ var speed = 50;
 var r = 255;
 var g = 0;
 var b = 0;
-var a = 0.7;
+var a = 0.06;
 var emitters = [];
 
 function Emitter(x,y){
@@ -53,7 +53,7 @@ function animate(){
 		}, speed)}
 	);
 	
-	c.fillStyle = "rgba(10,0,0,0.05)";
+	c.fillStyle = "rgba(10,0,0,0.7)";
 	c.fillRect(0,0,width,height);
 	r = floor(random(155,255));
 	g = floor(random(155,200));
