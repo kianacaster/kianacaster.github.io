@@ -1,133 +1,74 @@
-var fireworks = [];
-var gravity;
-
-function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
-  colorMode(HSB);
-  gravity = createVector(0, 0.1);
-  stroke(255);
-  strokeWeight(5);
-  background(51);
+var canvas = document.querySelector('canvas');
+var c = canvas.getContext('2d');
+var width = window.innerWidth;
+var height = window.innerHeight;
+canvas.width = width;
+canvas.height = height;
+var particles = [];
+var speed = 50;
+var r = 255;
+var g = 0;
+var b = 0;
+var a = 0.006;
+var emitters = [];
+function Emitter(x,y){
+	this.x = x;
+	this.y = y;
+	this.dx = 1;
+	this.dy = 1;
+	this.update = function(){
+		for(var i = 0; i < 20; i++){
+			particles.push(new Particle(this.x,this.y,20,20));
+		}
+	}	
 }
-
-function draw() {
-  colorMode(RGB);
-  background(0, 0, 0, 30);
-  
-  if (random(1) < 0.05) {
-    fireworks.push(new Firework());
-  }
-  
-  for (var i = fireworks.length - 1; i >= 0; i--) {
-    fireworks[i].update();
-    fireworks[i].show();
-    
-    if (fireworks[i].done()) {
-      fireworks.splice(i, 1);
-    }
-  }
+function Particle(x,y,w,h){
+	this.x = x;
+	this.y = y;
+	this.w = w;
+	this.h = h;	
+	this.draw = function(){
+		c.fillStyle = 'rgba(' + r +',' + g +','+ b +','+ a + ')';
+		c.fillRect(this.x,this.y,this.w,this.h);
+	}
+	this.update = function(){
+		this.x += random(-10,10);
+		this.y += 10;
+	}
 }
-
-function Firework() {
-  this.hu = random(255);
-  this.firework = new Particle(random(width), height, this.hu, true);
-  this.exploded = false;
-  this.particles = [];
-
-  this.done = function() {
-    if (this.exploded && this.particles.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  this.update = function() {
-    if (!this.exploded) {
-      this.firework.applyForce(gravity);
-      this.firework.update();
-      
-      if (this.firework.vel.y >= 0) {
-        this.exploded = true;
-        this.explode();
-      }
-    }
-    
-    for (var i = this.particles.length - 1; i >= 0; i--) {
-      this.particles[i].applyForce(gravity);
-      this.particles[i].update();
-      
-      if (this.particles[i].done()) {
-        this.particles.splice(i, 1);
-      }
-    }
-  }
-
-  this.explode = function() {
-    for (var i = 0; i < 100; i++) {
-      var p = new Particle(this.firework.pos.x, this.firework.pos.y, this.hu, false);
-      this.particles.push(p);
-    }
-  }
-
-  this.show = function() {
-    if (!this.exploded) {
-      this.firework.show();
-    }
-    
-    for (var i = 0; i < this.particles.length; i++) {
-      this.particles[i].show();
-    }
-  }
+window.onload = function(){
+	for(var i = 0; i < 5; i++){
+		emitters.push(new Emitter(random(width), random(height)));
+	}
 }
-function Particle(x, y, hu, firework) {
-  this.pos = createVector(x, y);
-  this.firework = firework;
-  this.lifespan = 255;
-  this.hu = hu;
-  this.acc = createVector(0, 0);
-  
-  if (this.firework) {
-    this.vel = createVector(0, random(-12, -8));
-  } else {
-    this.vel = p5.Vector.random2D();
-    this.vel.mult(random(2, 10));
-  }
- 
-  this.applyForce = function(force) {
-    this.acc.add(force);
-  }
-
-  this.update = function() {
-    if (!this.firework) {
-      this.vel.mult(0.9);
-      this.lifespan -= 4;
-    }
-    
-    this.vel.add(this.acc);
-    this.pos.add(this.vel);
-    this.acc.mult(0);
-  }
-
-  this.done = function() {
-    if (this.lifespan < 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  this.show = function() {
-    colorMode(HSB);
-    
-    if (!this.firework) {
-      strokeWeight(2);
-      stroke(hu, 255, 255, this.lifespan);
-    } else {
-      strokeWeight(4);
-      stroke(hu, 255, 255);
-    }
-    
-    point(this.pos.x, this.pos.y);
-  }
-}
+function animate(){
+	requestAnimationFrame(function(){
+		setTimeout(function(){
+			animate();
+		}, speed)}
+	);
+	c.fillStyle = "rgba(10,0,0,0.05)";
+	c.fillRect(0,0,width,height);
+	r = floor(random(155,255));
+	g = floor(random(155,200));
+	b = floor(random(155,255));
+	for(var i = 0; i < particles.length - 1; i++){
+		particles[i].draw();
+		particles[i].update();
+		if(particles[i].y > height){
+			particles.cut(i);
+		}
+	}
+	for(var i = 0 ; i < emitters.length - 1; i++){
+		if(emitters[i].x + 20 > width || emitters[i].x < 0){
+			emitters[i].dx = invert(emitters[i].dx);
+		}
+		if(emitters[i].y + 20 > height || emitters[i].y < 0){
+			emitters[i].dy = invert(emitters[i].dy);
+		}
+		emitters[i].x += 20 * emitters[i].dx;
+		emitters[i].y += floor(random(10,20)) * emitters[i].dy;
+		emitters[i].update();
+	}
+}	
+animate();
