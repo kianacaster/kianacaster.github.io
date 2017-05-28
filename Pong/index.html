@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style> 
+	  #mh {
+		font-size: 100px;
+		text-align: center;
+		font-family: "Lucida Sans Typewriter";
+		
+		}
+
+		p{
+			font-size: 20px;
+			text-align: center;
+			font-family: "Lucida Sans Typewriter";
+			
+		}
+
+		#sub{
+				top: 35vh;
+				left: 5%;
+				position: absolute;
+				width: 90%;
+		}
+
+  </style>
+</head>
+<body bgcolor="#000">
+	<font color="#FFF"><h1 id="mh">Pong</h1>
+	<p>When you enter the game, click your mouse to beign - after every point scored, click your mouse to play another.</p></font>
+	<input id="sub" type="submit" value="Click to begin" onclick="changepage()"></input>
+	<script>
+		function changepage(){
+		 window.location.replace("game.html");
+		}
+	</script>
+</body>
+</html>

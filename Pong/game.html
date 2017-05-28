@@ -1,0 +1,178 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style> body {padding: 10; margin: 10;} </style>
+</head>
+<body>
+  <p id="pscr">Player : 0</p>
+  <p id="cscr">CPU : 0</p>
+  <canvas id="canvas" width="700" height="500" />
+  <script>
+	const canvas = document.getElementById("canvas");
+	const c = canvas.getContext("2d");
+    let width = canvas.width;
+	let height = canvas.height;
+	let delay = 0;
+	let pscore = document.getElementById("pscr");
+	let cscore = document.getElementById("cscr");	
+	class Ball
+	{
+		constructor(x, y)
+		{
+			this.x = x;
+			this.y = y;
+			this.w = 10;
+			this.h = 10;
+			this.dx = 0;
+			this.dy = 0;
+		}
+		get left()
+		{
+			return this.x - this.w/ 2;
+		}
+		get right()
+		{
+			return this.x + this.w / 2;
+		}
+		get top()
+		{
+			return this.y - this.h/ 2;
+		}
+		get bottom()
+		{
+			return this.y + this.h / 2;
+		}
+		update()
+		{			
+			if(this.y > height - this.h){
+				this.dy = -this.dy;
+			}else if(this.y < 0){
+				this.dy = -this.dy;
+			}
+			
+			if(this.x + this.w > width){
+				this.x = width  / 2;
+				this.y = height / 2;
+				this.dx = 0;
+				this.dy = 0;
+				player.score++;
+			}else if(this.x < 0){
+				this.x = width  / 2;
+				this.y = height / 2;
+				this.dx = 0;
+				this.dy = 0;
+				opponent.score++;
+			}
+			this.draw();
+			this.collide(player, this);
+			this.collide(opponent, this);
+			this.x += this.dx;
+			this.y += this.dy;
+		}
+		
+		draw()
+		{
+			c.fillStyle = '#FFF';
+			c.fillRect(this.x,this.y,this.w,this.h);
+		}
+		
+		collide(paddle, b)
+		{
+			if (paddle.left < b.right && paddle.right > b.left &&
+				paddle.top < b.bottom && paddle.bottom > b.top) {
+				this.dx = -this.dx * 1.05;
+			}
+		}
+}	
+
+	
+	class Player
+	{
+		constructor(x, y, type)
+		{
+			this.x = x;
+			this.y = y;
+			this.w = 20;
+			this.h = 100;
+			this.dy = 2.5;
+			this.type = type;
+			this.score=  0;
+		}
+		get left()
+		{
+			return this.x - this.w;
+		}
+		get right()
+		{
+			return this.x + this.w;
+		}
+		get top()
+		{
+			return this.y;
+		}
+		get bottom()
+		{
+			return this.y + this.h ;
+		}
+		update()
+		{
+			this.draw();
+			if(this.type == "Player"){
+				return;
+			}else if(this.type == "Opponent"){
+				if(this.y < ball.y){
+					this.y += this.dy;
+				}else if(this.y > ball.y){
+					this.y -= this.dy;
+				}
+			}
+		}
+		
+		draw()
+		{
+			c.fillStyle = '#FFF';
+			c.fillRect(this.x,this.y,this.w,this.h);
+		}
+	}
+	
+	let ball = new Ball(width / 2, height / 2);
+	let player = new Player(10, height / 2, "Player");
+	let opponent = new Player(width - player.w - 10, height / 2, "Opponent");
+	function update(){
+		c.fillStyle = '#000';
+		c.fillRect(0,0,width,height);
+		requestAnimationFrame(function(){
+			setTimeout(function(){
+				update();
+			}, delay)}	
+		);		
+		ball.update();
+		player.update();
+		opponent.update();
+		pscore.innerHTML = "Player Score : " + player.score;
+		cscore.innerHTML = "CPU Score : " + opponent.score;
+	}
+	canvas.addEventListener('mousemove', event => {
+		const scale = event.offsetY / event.target.getBoundingClientRect().height;
+		player.y = height * scale;
+	});
+	
+	canvas.addEventListener('click', event => {
+		if(ball.dx == 0){
+			ball.dx = Math.floor(Math.random() * (5 - -5) + -5);
+			ball.dy = Math.floor(Math.random() * (5 - -5) + -5);
+			
+			if(ball.dx == 0) ball.dx = 5;
+			if(ball.dy == 0) ball.dy = 5;
+			if(ball.dx > -3 && ball.dx < 0) ball.dx = -3;						
+			if(ball.dy > -3 && ball.dy < 0) ball.dy = -3;
+			if(ball.dx < 3 && ball.dx > 0) ball.dx = 3;						
+			if(ball.dy < 3 && ball.dy > 0) ball.dy = 3;
+
+		}
+	});
+	update();
+  
+  </script>
+</body>
+</html>
