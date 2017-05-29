@@ -1,0 +1,64 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style> body {padding: 10; margin: 10;} </style>
+</head>
+<body>
+  <p>A simple rain simulation like thing made in JavaScript - the concept was inspired by Dan Shiffman's Purple Rain.</p>
+  <canvas id="canvas" width="600" height="400" />
+  <script>
+	const canvas = document.getElementById("canvas");
+	const c = canvas.getContext("2d");
+    let width = canvas.width;
+	let height = canvas.height;
+	let delay = 0;
+	let drops = [];
+
+	class Drop
+	{
+		constructor(x, y)
+		{
+			this.x = x;
+			this.y = y;
+			this.dy = 10;
+			this.w = Math.random() * (5 - 2) + 2;
+			this.h = Math.random() * (12 - 9) + 9;
+		}
+	
+		update()
+		{
+			this.draw();
+			this.y += this.dy;		
+			if(this.y > height){
+				this.y =  Math.random() * (-5 - -500) + -500;
+				this.x = Math.random() * (width - 0) + 0;
+			}
+		}
+		
+		draw()
+		{
+			c.fillStyle = "#00F";
+			c.fillRect(this.x,this.y,this.w,this.h);
+		}
+	}
+	
+	for(var i = 0; i < 100; i++){
+		drops.push(new Drop(Math.random() * (width - 0) + 0, Math.random() * (-5 - -500) + -500));
+	}
+	function update(){
+		c.fillStyle = '#AAA';
+		c.fillRect(0,0,width,height);
+		for(var i = 0; i < drops.length; i++){
+			drops[i].update();
+		}
+		requestAnimationFrame(function(){
+			setTimeout(function(){
+				update();
+			}, delay)}	
+		);		
+	}
+	update();
+  
+  </script>
+</body>
+</html>
