@@ -1,5 +1,5 @@
 // Word Count : 155 \\
-
+// Words and definitions taken from https://www.vocabulary.com/lists/52473 \\
 let words = 
 [
 	["notabilia", "matters, events, or items worthy of note."],
