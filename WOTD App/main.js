@@ -1,3 +1,8 @@
+function changeWord(){
+	index = Math.floor(Math.random() * words.length);
+	document.getElementById("word").innerHTML = words[index][0];
+	document.getElementById("def").innerHTML = words[index][1];
+}
 var config = {
 	apiKey: "AIzaSyCWgWgpWEt9qjAV-2MBWyDOsQCUZ8Mwt04",
 	authDomain: "wotd-97c52.firebaseapp.com",
@@ -30,10 +35,3 @@ ref.on('value', function(data){
 	console.log(error);
 }
 );
-
-function changeWord(){
-	index = Math.floor(Math.random() * words.length);
-	document.getElementById("word").innerHTML = words[index][0];
-	document.getElementById("def").innerHTML = words[index][1];
-}
-
