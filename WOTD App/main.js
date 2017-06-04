@@ -1,3 +1,4 @@
+console.log("6.52");
 function changeWord(){
 	index = Math.floor(Math.random() * words.length);
 	document.getElementById("word").innerHTML = words[index][0];
