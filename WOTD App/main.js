@@ -1,4 +1,5 @@
 console.log("6.52");
+var index;
 function changeWord(){
 	index = Math.floor(Math.random() * words.length);
 	document.getElementById("word").innerHTML = words[index][0];
@@ -16,7 +17,6 @@ firebase.initializeApp(config);
 var database = firebase.database();
 ref = database.ref('date');
 var d = new Date();
-var index;
 ref.on('value', function(data){
 	var vals = data.val();
 	var keys = Object.keys(vals);
