@@ -36,4 +36,3 @@ function changeWord(){
 	document.getElementById("word").innerHTML = words[index][0];
 	document.getElementById("def").innerHTML = words[index][1];
 }
-
