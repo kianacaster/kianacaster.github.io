@@ -27,10 +27,13 @@ function Snake(){
 			pos = this.tail[i];
 			var d = dist(this.x, this.y, pos.x, pos.y);
 			if(d < 1){
-				console.log("Restarting");
+				background(0);
+				alert("You died with a score of " + this.score + "\n" + "Press 'OK' to replay");
 				this.total = 0;
-				this.tail.splice(0, this.tail.length);
 				this.score = 0;
+				this.tail.splice(0, this.tail.length);
+				console.log("Restarting");
+				
 			}
 		}
 	}
@@ -47,11 +50,23 @@ function Snake(){
 		this.x += this.xspeed * scl;
 		this.y += this.yspeed * scl;
 		
-		this.x = constrain(this.x, 0, width - scl);
-		this.y = constrain(this.y, 0, height - scl);
+		if(this.x  + scl > width && this.xspeed == 1){
+			this.x = 0;
+		}else if(this.x < 0 && this.xspeed == -1){
+			this.x = width - scl;
+		}
+		
+		if(this.y  + scl > height && this.yspeed == 1){
+			this.y = 0;
+		}else if(this.y < 0 && this.yspeed == -1){
+			this.y = height - scl;
+		}
+		//this.x = constrain(this.x, 0, width - scl);
+		//this.y = constrain(this.y, 0, height - scl);
 	}
 	
 	this.show = function(){
+	noStroke();
 		fill(255);
 		for(var i = 0; i < this.tail.length; i++){
 			rect(this.tail[i].x, this.tail[i].y, scl, scl);
