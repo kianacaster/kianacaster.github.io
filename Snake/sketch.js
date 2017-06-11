@@ -4,7 +4,7 @@ var scr;
 var food;
 
 function setup(){
-	createCanvas(600,600);
+	createCanvas(800, 600);
 	scr = document.getElementById("scr");
 	snake = new Snake();
 	frameRate(10);
@@ -20,12 +20,13 @@ function pickLocation(){
 
 function draw(){
 	scr.innerHTML = "Score: " + str(snake.score);
-	for(var y = 0; y < height; y += scl){
+	background(0);
+	/*for(var y = 0; y < height; y += scl){
 		for(var x = 0; x < width; x += scl){
 			fill(51);
 			rect(x,y,scl, scl);
 		}
-	}
+	}*/
 	if(snake.eat(food)){
 		pickLocation();
 		snake.score++;
@@ -33,18 +34,18 @@ function draw(){
 	snake.death();
 	snake.update();
 	snake.show();
-	fill(255, 0, 100);
+	fill(255, 0, 0);
 	rect(food.x, food.y, scl, scl);
 }
 
 function keyPressed(){
-	if(keyCode == UP_ARROW){
+	if(keyCode == UP_ARROW && snake.yspeed !== 1){
 		snake.dir(0, -1);	
-	}else if(keyCode == DOWN_ARROW){
+	}else if(keyCode == DOWN_ARROW && snake.yspeed !== -1){
 		snake.dir(0, 1);
-	}else if(keyCode == RIGHT_ARROW){
+	}else if(keyCode == RIGHT_ARROW && snake.xspeed !== -1){
 		snake.dir(1, 0);
-	}else if(keyCode == LEFT_ARROW){
+	}else if(keyCode == LEFT_ARROW && snake.xspeed !== 1){
 		snake.dir(-1, 0);
 	}
 }
