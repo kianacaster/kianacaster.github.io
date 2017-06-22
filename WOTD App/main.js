@@ -25,12 +25,15 @@ ref.on('value', function(data){
 	var day = vals[keys[keys.length - 1]].day;
 
 	if(d.getDay() !== day){
+		let rand = Math.floor(Math.random() * words.length);
 		ref.push({ 
 			day: d.getDay(),
-			index: Math.floor(Math.random() * words.length)
+			index: rand
 		});
-	}
-	index = vals[keys[keys.length - 1]].index;
+		index = rand;
+	}else{
+		index = vals[keys[keys.length - 1]].index;
+	}	
 	document.getElementById("word").innerHTML = words[index][0];
 	document.getElementById("def").innerHTML = words[index][1];
 }, function(error){
