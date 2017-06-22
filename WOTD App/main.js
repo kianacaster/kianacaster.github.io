@@ -19,7 +19,6 @@ var database = firebase.database();
 ref = database.ref('date');
 var d = new Date();
 
-
 ref.on('value', function(data){
 	var vals = data.val();
 	var keys = Object.keys(vals);
