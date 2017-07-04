@@ -36,6 +36,7 @@ function draw(){
 	snake.show();
 	fill(255, 0, 0);
 	rect(food.x, food.y, scl, scl);
+	snake.score = snake.total;
 }
 
 function keyPressed(){
