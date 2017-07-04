@@ -92,9 +92,9 @@ function drawthicknessm1(){ if(drawThickness - 1 > 0){ drawThickness = drawThick
 function drawthicknessp10(){ if(drawThickness < 75){drawThickness+=10;} } // Increases drawThickness by 10
 function drawthicknessm10(){ if(drawThickness - 10 > 0){ drawThickness = drawThickness - 10; }else{ drawThickness = 1; } }	
 
-function rubthicknessp1(){ if(rubThickness < 75){rubThickness++;} }// Increases rubThickness by 1
+function rubthicknessp1(){ if(rubThickness < 75){ rubThickness++; } }// Increases rubThickness by 1
 function rubthicknessm1(){ if(rubThickness - 1 > 0){ rubThickness = rubThickness - 10; }else{ rubThickness = 1; } } // Decreases rubThickness by 1, can't go lower than 1
-function rubthicknessp10(){ if(rubThickness < 75){rubThickness+=10;} }// Increases rubThickness by 10
+function rubthicknessp10(){ if(rubThickness < 75){ rubThickness+=10; } }// Increases rubThickness by 10
 function rubthicknessm10(){ if(rubThickness - 10 > 0){ rubThickness = rubThickness - 10; }else{ rubThickness = 1; } }// Decreases rubThickness by 10, can't go lower than 1
 
 function clearCanvas(){ // Clears the canvas
@@ -108,7 +108,7 @@ function restore(){
 	drawThickness = temp; 
 }
 
-// 	If the mouse is pressed draw a line from the start coordinates to the end coordinates - left mouse draws black, right mouse draws white (illusion of an eraser)
+// If the mouse is pressed draw a line from the start coordinates to the end coordinates - left mouse draws black, right mouse draws white (illusion of an eraser)
 function draw() {
 	strokeWeight(5);
 	stroke(0);
