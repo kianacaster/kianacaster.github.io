@@ -20,7 +20,7 @@ function pickLocation(){
 
 function draw(){
 	scr.innerHTML = "Score: " + str(snake.score);
-	background(0);
+	background(255);
 	/*for(var y = 0; y < height; y += scl){
 		for(var x = 0; x < width; x += scl){
 			fill(51);
