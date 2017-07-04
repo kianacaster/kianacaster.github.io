@@ -29,14 +29,13 @@ function draw(){
 	}*/
 	if(snake.eat(food)){
 		pickLocation();
-		snake.score++;
+		snake.total = snake.score += 1;
 	}
 	snake.death();
 	snake.update();
 	snake.show();
 	fill(255, 0, 0);
 	rect(food.x, food.y, scl, scl);
-	snake.score = snake.total;
 }
 
 function keyPressed(){
