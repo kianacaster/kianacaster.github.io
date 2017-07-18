@@ -1,0 +1,14 @@
+body {
+	text-align: center;
+	background: #AAA;
+}
+			
+#score {
+	font-family: Cambria;
+	font-size: 175px;
+}
+			
+#scoreButton {
+	height: 10vh;
+	width: 80vh;
+}
