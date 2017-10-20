@@ -6,20 +6,6 @@
 	text-decoration: underline;
 }
 
-#jsimg{
-	position: absolute;
-	top: 220px;
-	left: 12px;
-}
-
-#exp{
-	color: #FFF;
-	position: absolute;
-	right: 50px;
-	font-size: 24px;
-	font-family: Verdana;
-}
-
 .dropbtn {
 	background-color: #FBAF77;
 	color: white;
@@ -35,8 +21,10 @@
 }
 
 .dropdown {
+	padding: 20vh;
 	position: relative;
 	display: inline-block;
+	float: left;
 }
 
 .dropdown-content {
@@ -58,3 +46,4 @@
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .show {display:block;}
+
