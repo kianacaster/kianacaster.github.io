@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="../libraries/p5.js"></script>
+	<script src="../libraries/p5.dom.js"></script>
+	<script>
+	const scl = 250;
+	let sliderN, sliderD;
+	function setup(){
+		createCanvas(800, 600);
+		sliderN = createSlider(1, 10, 4, 1);
+		sliderD = createSlider(1, 10, 4, 1);
+		sliderN.position(0, 10);
+		sliderD.position(0, 50);
+	}
+	function draw(){
+		background(255);
+		beginShape();
+		for(let a = 0; a < TWO_PI * sliderD.value(); a+=0.01) vertex(width / 2 + (cos((sliderN.value() / sliderD.value()) * a) * 250) * cos(a), height / 2 + (cos((sliderN.value() / sliderD.value()) * a) * 250) * sin(a));
+		endShape(CLOSE);
+	}
+	</script>
+</head>
+</html>
