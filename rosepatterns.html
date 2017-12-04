@@ -16,7 +16,7 @@
 	function draw(){
 		background(255);
 		beginShape();
-		for(let a = 0; a < TWO_PI * sliderD.value(); a+=0.01) vertex(width / 2 + (cos((sliderN.value() / sliderD.value()) * a) * 250) * cos(a), height / 2 + (cos((sliderN.value() / sliderD.value()) * a) * 250) * sin(a));
+		for(let a = 0; a < TWO_PI * sliderD.value(); a+=0.01) vertex(width / 2 + (cos((sliderN.value() / sliderD.value()) * a) * scl) * cos(a), height / 2 + (cos((sliderN.value() / sliderD.value()) * a) * scl) * sin(a));
 		endShape(CLOSE);
 	}
 	</script>
