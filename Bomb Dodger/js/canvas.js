@@ -5,13 +5,14 @@ const height = canvas.height = 600;
 const shootingSFX1 = new Audio("assets/shot1.mp3");
 const shootingSFX2 = new Audio("assets/shot2.mp3");
 const lifeLostSFX = new Audio("assets/explode01.ogg");
-let scene = 0;
 const playerHeight = 10;
 const playerWidth = 100;
-let debug = false;
 const player = new Player(new Vector(width/2 - playerWidth/2, height - playerHeight), playerWidth, playerHeight);
 let bombs = [];
 let difficulty = 0;
+let scene = 0;
+let debug = false;
+
 window.onload = function(){
 	update();
 }
@@ -28,9 +29,9 @@ function update(){
 		let beginText = "Press 'E' to begin.";
 		ctx.fillStyle = "#000";
 		ctx.font = "60px Arial";
-		ctx.fillText(title, width/2-30*title.toString().length/2, height/2);
+		ctx.fillText(title, width/2-30*title.length/2, height/2);
 		ctx.font = "25px Arial";
-		ctx.fillText(beginText, width/2-12.5*beginText.toString().length/2, height/2 + 40);
+		ctx.fillText(beginText, width/2-12.5*beginText.length/2, height/2 + 40);
 	}else if(scene == 1){
 		begin();
 		scene++;
@@ -63,7 +64,7 @@ function update(){
 function begin(){
 	player.lives = 3;
 	player.score = 0;
-	setInterval(spawnBomb, 400 - difficulty);
+	setInterval(() => {if(scene == 2 || player.lives > 0){spawnBomb();}}, 400 - difficulty);
 }
 document.addEventListener("keydown", (event)=>{
 	if(event.keyCode === 37){
@@ -93,6 +94,9 @@ document.addEventListener("keyup", (event)=>{
 	if(event.keyCode === 69 && scene==0){
 		scene = 1;
 	}
+	if(event.keyCode === 69 && scene==3){
+		window.location.reload();
+	}
 });
 
 function spawnBomb(){
@@ -100,6 +104,13 @@ function spawnBomb(){
 }	
 
 function endGame(){
-	alert("You Lost with a Score of " + player.score);
-	window.location.reload();
+	bombs.length = 0;
+	scene = 3;
+	let deathScore = "You died with a score of : " + player.score;
+	let refText = "Press E to Refresh";
+	ctx.fillStyle = "#000";
+	ctx.font = "60x Arial";
+	ctx.fillText("You died with a score of : " + player.score, width/2-15*deathScore.toString().length/2, height/2);
+	ctx.font = "25px Arial";
+	ctx.fillText(refText, width/2-12.5*refText.toString().length/2, height/2 + 40);
 }
