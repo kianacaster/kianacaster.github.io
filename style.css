@@ -40,7 +40,7 @@ ul li:hover ul li {
 	display: block;
 }
 
-#quote {
+iframe {
 	position: absolute;
 	left: 60vh;
 	top: 30vh;
