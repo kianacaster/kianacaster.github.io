@@ -44,4 +44,5 @@ iframe {
 	position: absolute;
 	left: 60vh;
 	top: 30vh;
+	outline: 5px solid black;
 }
