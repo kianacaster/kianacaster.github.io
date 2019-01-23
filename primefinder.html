@@ -1,0 +1,50 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  	<script>	
+	function initialise(number, array){
+		for(let i = 2; i <= number; i++) array.push(i);
+		return array;
+	}
+	
+	function calculate(number, array){
+		for(let i = 0; i <= Math.sqrt(number); i++){
+			if(array[i - 2] != null){
+				for(let j = Math.pow(i, 2); j <= number; j+=i){
+					array[j - 2] = null;
+				}
+			}
+		}
+		return array;
+	}
+	
+	function reduceArray(array){
+		for(let i = array.length; i > 0; i--){
+			if(array[i] == null) array.splice(i, 1); 
+		}
+		return array;
+	}
+	
+	function run(){
+		let a = [];
+		let n = parseInt(document.getElementById("number").value);
+		document.getElementById("result").innerHTML = reduceArray(calculate(n, initialise(n, a))).toString();
+		
+	}
+	</script>
+</head>
+<body>
+	<h1><u>Generating primes using the <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes method</a></u></h1>
+	<p>This algorithm generates prime numbers up to a predefined maximum. Set the max number by typing it into the text box, and press <b>"Calculate"</b> to display the results.</p>
+	<input type="text" id="number" placeholder="Max number"/>
+	<button onclick="run()">Calculate</button>
+	<h3 id="result">Result displayed here.</h3>
+	
+	<style>
+		#result{
+			word-wrap: break-word;
+			border: 5px solid red;
+		}
+	</style>
+</body>
+</html>
