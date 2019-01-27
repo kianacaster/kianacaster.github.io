@@ -1,36 +1,81 @@
 body { 
-  background: url(assets/background.png) no-repeat; 
+  background: url(background.jpg) no-repeat; 
   background-size: cover;
-  font-family: Arial;
+  font-family: 'Montserrat', sans-serif;
   color: white;
+  font-size: 12px;
   text-align: center;
+  padding: 0px;
+  margin: 0px;
+}
+
+/*navigation cover*/
+
+#nav:hover{
+	background : #365B41;
+	transition-duration: 0.75s;
+	margin-bottom:0px;
+	opacity: 0.8;
+}
+
+#nav{
+	padding: 0px;
+	margin: 0px;
+}
+
+/*title format*/
+
+#title{
+	font-size: 29px;
+	text-align: center;
+	padding-top: 15.5%;
+}
+
+/*individual buttons*/
+
+div{
+	height: 60px;
 }
 
 ul {
-	margin: 0 auto;
+	margin: 0px;
 	padding: 0px;
 	list-style: none;
+	width: 100%;
+	height: 60px;
+
 }
 
 ul li {
-	float: left;
-	width: 225px;
+	float: right;
 	height: 40px;
-	background-color: white;
-	opacity: 0.8;
 	line-height: 40px;
-	font-size: 20px;
+	font-weight: bold;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-top: 10px;
+}
+
+/*blue circles*/
+
+ul li:hover{
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-top: 0px;
+	margin-top: 10px;
+	border-radius: 20px;
+	background-color: #00AAFF;
+	opacity: 1;
+	transition-duration: 0.8s;
 }
 
 ul li a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	display: block;
 }
 
-ul li a:hover {
-	background-color: blue;
-}
+/*display type*/
 
 ul li ul li {
 	display: none;
@@ -38,11 +83,4 @@ ul li ul li {
 
 ul li:hover ul li {
 	display: block;
-}
-
-iframe {
-	position: absolute;
-	left: 60vh;
-	top: 30vh;
-	outline: 5px solid black;
 }
