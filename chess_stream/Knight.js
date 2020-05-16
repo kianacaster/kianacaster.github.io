@@ -1,7 +1,7 @@
 class Knight extends Piece
 {
 	constructor(){
-		super("knight");
+		super("night");
 	}
 
 	getLegalMoves(board)
@@ -24,6 +24,6 @@ class Knight extends Piece
 		if(this.tile.tileY <= 6 && this.tile.tileX <= 6) this.legalMoves.push(board.tiles[this.tile.tileY + 1][this.tile.tileX + 2]);
 		
 		if(this.tile.tileY <= 6 && this.tile.tileX >= 2) this.legalMoves.push(board.tiles[this.tile.tileY + 1][this.tile.tileX - 2]);
-	}
 
+	}
 }

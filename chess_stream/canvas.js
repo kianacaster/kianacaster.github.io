@@ -27,11 +27,11 @@ start();
 let selectedTile;
 let selectedPiece;
 canvas.addEventListener('click', event => {
-	/*for(let i = 0; i < 8; i++){
+	for(let i = 0; i < 8; i++){
 		for(let j = 0; j < 8; j++){
 			if(!board.tiles[i][j].isAvailable) board.tiles[i][j].piece.getLegalMoves(board);
 		}
-	}*/
+	}
 	if(selectedTile){
 		selectedTile.deselect();
 	} 
@@ -48,7 +48,8 @@ canvas.addEventListener('click', event => {
 		if(selectedPiece) {	
 			if(moveCount % 2 == 0){
 				if(selectedPiece.colour == "white"){
-					selectedPiece.getLegalMoves(board)
+					//selectedPiece.getLegalMoves(board)
+					selectedPiece.check();
 					selectedPiece.move(selectedTile);
 					selectedPiece = null;
 					selectedTile.deselect();
@@ -60,7 +61,8 @@ canvas.addEventListener('click', event => {
 				}
 			}else{
 				if(selectedPiece.colour == "black"){
-					selectedPiece.getLegalMoves(board)
+					//selectedPiece.getLegalMoves(board)
+					selectedPiece.check();
 					selectedPiece.move(selectedTile);
 					selectedPiece = null;
 					selectedTile.deselect();

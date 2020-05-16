@@ -37,7 +37,7 @@ class Board
 		this.tiles[7][0].piece.colour = "white";
 		this.tiles[7][7].setPiece(new Rook());
 		this.tiles[7][7].piece.colour = "white";
-//
+
 		this.tiles[0][1].setPiece(new Knight());
 		this.tiles[0][1].piece.colour = "black";
 		this.tiles[7][1].setPiece(new Knight());
@@ -55,11 +55,18 @@ class Board
 		this.tiles[0][2].setPiece(new Bishop());
 		this.tiles[0][2].piece.colour = "black";
 		this.tiles[7][2].piece.colour = "white";
-
-		//this.tiles[2][3].setPiece(new Bishop());
-		//this.tiles[5][3].setPiece(new Bishop());
-		//this.tiles[2][3].piece.colour = "black";
-		//this.tiles[5][3].piece.colour = "white";
+		this.tiles[0][3].setPiece(new Queen());
+		this.tiles[7][3].setPiece(new Queen());
+		this.tiles[0][3].piece.colour = "black";
+		this.tiles[7][3].piece.colour = "white";
+		this.tiles[0][4].setPiece(new King());
+		this.tiles[7][4].setPiece(new King());
+		this.tiles[0][4].piece.colour = "black";
+		this.tiles[7][4].piece.colour = "white";
+		// this.tiles[2][3].setPiece(new King());
+		// this.tiles[7][3].setPiece(new King());
+		// this.tiles[2][3].piece.colour = "black";
+		// this.tiles[7][3].piece.colour = "white";
 
 	}
 
