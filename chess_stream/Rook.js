@@ -12,6 +12,10 @@ class Rook extends Piece
 			if(board.tiles[this.tile.tileY][i].isAvailable){
 				this.legalMoves.push(board.tiles[this.tile.tileY][i]);
 			}else{
+				if(board.tiles[this.tile.tileY][i].piece.colour !== this.colour){
+					this.legalMoves.push(board.tiles[this.tile.tileY][i]);
+					break;
+				}
 				break;
 			}
 		}	
@@ -20,6 +24,10 @@ class Rook extends Piece
 			if(board.tiles[this.tile.tileY][i].isAvailable){
 				this.legalMoves.push(board.tiles[this.tile.tileY][i]);
 			}else{
+				if(board.tiles[this.tile.tileY][i].piece.colour !== this.colour){
+					this.legalMoves.push(board.tiles[this.tile.tileY][i]);
+					break;
+				}
 				break;
 			}
 		}	
@@ -28,6 +36,10 @@ class Rook extends Piece
 			if(board.tiles[i][this.tile.tileX].isAvailable){
 				this.legalMoves.push(board.tiles[i][this.tile.tileX]);
 			}else{
+				if(board.tiles[i][this.tile.tileX].piece.colour !== this.colour){
+					this.legalMoves.push(board.tiles[i][this.tile.tileX]);
+					break;
+				}
 				break;
 			}
 		}	
@@ -36,6 +48,10 @@ class Rook extends Piece
 			if(board.tiles[i][this.tile.tileX].isAvailable){
 				this.legalMoves.push(board.tiles[i][this.tile.tileX]);
 			}else{
+				if(board.tiles[i][this.tile.tileX].piece.colour !== this.colour){
+					this.legalMoves.push(board.tiles[i][this.tile.tileX]);
+					break;
+				}
 				break;
 			}
 		}	

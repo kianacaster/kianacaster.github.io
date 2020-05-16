@@ -41,21 +41,43 @@ canvas.addEventListener('click', event => {
 	let tileX = Math.floor(mouseX / (width / 8));
 	let tileY = Math.floor(mouseY / (width / 8));
 
+	//if(!selectedTile){
 	board.tiles[tileY][tileX].select();
 	selectedTile = board.tiles[tileY][tileX];
-	if(!selectedTile.isAvailable) selectedPiece = selectedTile.piece;
-
-	if(selectedPiece && selectedTile.isAvailable) {	
-		if(moveCount % 2 == 0){
-			if(selectedPiece.colour == "white"){
-				selectedPiece.getLegalMoves(board)
-				selectedPiece.move(selectedTile);
+	//}else{
+		if(selectedPiece) {	
+			if(moveCount % 2 == 0){
+				if(selectedPiece.colour == "white"){
+					selectedPiece.getLegalMoves(board)
+					selectedPiece.move(selectedTile);
+					selectedPiece = null;
+					selectedTile.deselect();
+					selectedTile = null;
+				}else{
+					selectedPiece = null;
+					selectedTile.deselect();
+					selectedTile = null;
+				}
+			}else{
+				if(selectedPiece.colour == "black"){
+					selectedPiece.getLegalMoves(board)
+					selectedPiece.move(selectedTile);
+					selectedPiece = null;
+					selectedTile.deselect();
+					selectedTile = null;
+				}else{
+					selectedPiece = null;
+					selectedTile.deselect();
+					selectedTile = null;
+				}
 			}
 		}else{
-			if(selectedPiece.colour == "black"){
-				selectedPiece.getLegalMoves(board)
-				selectedPiece.move(selectedTile);
-			}
+			board.tiles[tileY][tileX].select();
+			selectedTile = board.tiles[tileY][tileX];
 		}
+	//}
+	if(selectedTile){
+		if(!selectedTile.isAvailable && !selectedPiece) selectedPiece = selectedTile.piece;
 	}
+
 });
