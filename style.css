@@ -1,86 +1,339 @@
-body { 
-  background: url("qzEYl1Y.jpg") no-repeat; 
-  background-size: cover;
-  font-family: 'Montserrat', sans-serif;
-  color: white;
-  font-size: 12px;
-  text-align: center;
-  padding: 0px;
-  margin: 0px;
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/*navigation cover*/
-
-#nav:hover{
-	background : #7A1807;
-	transition-duration: 0.75s;
-	margin-bottom:0px;
-	opacity: 0.8;
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #e0e0e0;
+    background-color: #121212;
+    margin: 0;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
-#nav{
-	padding: 0px;
-	margin: 0px;
+header {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/*title format*/
-
-#title{
-	font-size: 29px;
-	text-align: center;
-	padding-top: 15.5%;
+header .logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #9b59b6;
 }
 
-/*individual buttons*/
-
-div{
-	height: 60px;
+header .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
 }
 
-ul {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-	width: 100%;
-	height: 60px;
-
+header .nav-links li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
-ul li {
-	float: right;
-	height: 40px;
-	line-height: 40px;
-	font-weight: bold;
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-top: 10px;
+header .nav-links li a:hover {
+    color: #9b59b6;
 }
 
-/*blue circles*/
-
-ul li:hover{
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-top: 0px;
-	margin-top: 10px;
-	border-radius: 20px;
-	background-color: #00AAFF;
-	opacity: 1;
-	transition-duration: 0.8s;
+/* Section Styling */
+.section {
+    padding: 4rem 2rem;
+    text-align: center;
 }
 
-ul li a {
-	text-decoration: none;
-	color: white;
-	display: block;
+#hero {
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.7)), url("hero-bg.jpg") no-repeat center center/cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-/*display type*/
-
-ul li ul li {
-	display: none;
+#hero .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #9b59b6;
 }
 
-ul li:hover ul li {
-	display: block;
+#hero .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+#hero .btn {
+    background: #9b59b6;
+    color: #fff;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: background 0.3s ease;
+}
+
+#hero .btn:hover {
+    background: #7d3c98;
+}
+
+#projects {
+    background: #1a1a1a;
+}
+
+#projects h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #9b59b6;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Collapsible Section Styling */
+.year-section {
+    margin-bottom: 2rem;
+}
+
+.collapsible {
+    cursor: pointer;
+    background: #1a1a1a;
+    color: #9b59b6;
+    padding: 1.5rem;
+    border: none;
+    text-align: center; /* Center the text */
+    font-size: 2rem; /* Increase font size */
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    transition: background 0.3s ease;
+    position: relative; /* For positioning the arrow */
+}
+
+.collapsible:hover {
+    background: #333;
+}
+
+.collapsible .arrow {
+    position: absolute; /* Position the arrow */
+    right: 1.5rem; /* Add space to the right */
+    font-size: 1.5rem; /* Adjust arrow size */
+    transition: transform 0.3s ease;
+}
+
+.collapsible .arrow.rotate {
+    transform: rotate(180deg);
+}
+
+/* Project List Grid */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Project Card Styling */
+.project-card {
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a); /* Gradient background for contrast */
+    border-radius: 12px; /* Slightly more rounded corners */
+    padding: 1rem; /* Add padding for better spacing */
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 -2px 4px rgba(255, 255, 255, 0.1); /* Enhanced shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    width: 100%; /* Ensure cards take up full grid width */
+    max-width: 300px; /* Set a maximum width for consistency */
+    height: 420px; /* Slightly taller for better content spacing */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-start; /* Align content to the top */
+    overflow: hidden; /* Prevent overflow */
+    margin: 0 auto; /* Center the card horizontally */
+}
+
+.project-card:hover {
+    transform: translateY(-8px); /* Lift the card slightly on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 -4px 8px rgba(255, 255, 255, 0.2); /* Stronger shadow on hover */
+    background: linear-gradient(145deg, #292929, #3a3a3a); /* Slightly lighter gradient on hover */
+}
+
+/* Thumbnail (Iframe) Styling */
+.project-card iframe {
+    width: 100%; /* Full width of the card */
+    height: 60%; /* Take up 60% of the card height */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners for the top */
+    overflow: hidden; /* Hide scrollbars */
+    pointer-events: none; /* Disable interaction with the iframe */
+    transform: scale(1); /* Ensure the iframe content fits the card */
+    transform-origin: top left; /* Scale from the top-left corner */
+    display: block; /* Ensure the iframe fills the space */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to the iframe */
+}
+
+/* Title Styling */
+.project-card h3 {
+    font-size: 1.4rem; /* Slightly larger font size */
+    margin: 0.8rem 0;
+    color: #ffffff; /* Bright text for contrast */
+    text-overflow: ellipsis; /* Handle long titles */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Description Styling */
+.project-card p {
+    font-size: 1rem; /* Slightly larger font size */
+    color: #d3d3d3; /* Softer text color */
+    margin: 0.5rem 0;
+    text-overflow: ellipsis; /* Handle long descriptions */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Link Styling */
+.project-card a {
+    text-decoration: none;
+    color: #9b59b6; /* Highlighted link color */
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: auto; /* Push the link to the bottom */
+    transition: color 0.3s ease;
+}
+
+.project-card a:hover {
+    color: #d4a5f5; /* Lighter purple on hover */
+}
+
+.project-list.hidden {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+/* About Me Section Styling */
+#about {
+    height: 100vh; /* Full screen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 2rem; /* Add padding for spacing */
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a); /* Match the gradient background */
+    color: #ffffff; /* Ensure text is readable */
+}
+
+#about h2 {
+    font-size: 2.5rem; /* Larger heading */
+    margin-bottom: 1rem;
+}
+
+#about p {
+    font-size: 1.2rem; /* Slightly larger text for readability */
+    max-width: 800px; /* Limit text width for better readability */
+    margin-bottom: 2rem;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
+    gap: 1rem;
+    width: 100%; /* Ensure the grid spans the full width */
+    max-width: 800px; /* Limit the grid width */
+    margin-top: 2rem;
+}
+
+.social-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: linear-gradient(145deg, #292929, #3a3a3a); /* Gradient background */
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.social-tile img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+}
+
+social-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(145deg, #3a3a3a, #4a4a4a); /* Slightly lighter gradient on hover */
+}
+
+.social-tile span {
+    font-size: 0.9rem;
+    color: #d3d3d3;
+}
+
+/* Contact Section Styling */
+.contact-section {
+    margin-top: 3rem; /* Add spacing above the contact section */
+    text-align: center;
+}
+
+.contact-section h3 {
+    font-size: 2rem; /* Subheading size */
+    margin-bottom: 1rem;
+    color: #9b59b6; /* Highlighted color for the subheading */
+}
+
+.contact-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0; /* Softer text color */
+}
+
+.contact-section .btn {
+    background: #9b59b6;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.contact-section .btn:hover {
+    background: #7d3c98; /* Slightly lighter purple on hover */
+}
+
+footer {
+    background: #000;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
 }
