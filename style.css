@@ -154,26 +154,67 @@ header .nav-links li a:hover {
 
 /* Project Card Styling */
 .project-card {
-    background: linear-gradient(145deg, #1e1e1e, #2a2a2a); /* Gradient background for contrast */
-    border-radius: 12px; /* Slightly more rounded corners */
-    padding: 1rem; /* Add padding for better spacing */
-    text-align: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 -2px 4px rgba(255, 255, 255, 0.1); /* Enhanced shadow for depth */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    width: 100%; /* Ensure cards take up full grid width */
-    max-width: 300px; /* Set a maximum width for consistency */
-    height: 420px; /* Slightly taller for better content spacing */
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    justify-content: flex-start; /* Align content to the top */
-    overflow: hidden; /* Prevent overflow */
-    margin: 0 auto; /* Center the card horizontally */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #2a2a2a; /* Slightly lighter background for contrast */
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for better visibility */
+    border: 2px solid #9b59b6; /* Highlighted border color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    color: #ffffff;
+    width: 100%; /* Ensure cards take full width of the container */
+    max-width: 300px; /* Optional: Limit the width of each card */
+    margin: 1rem auto; /* Add spacing between cards */
+    animation: sway 5s ease-in-out infinite; /* Add sway animation */
 }
 
 .project-card:hover {
-    transform: translateY(-8px); /* Lift the card slightly on hover */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 -4px 8px rgba(255, 255, 255, 0.2); /* Stronger shadow on hover */
-    background: linear-gradient(145deg, #292929, #3a3a3a); /* Slightly lighter gradient on hover */
+    transform: scale(1.05); /* Slightly grow on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+    border-color: #d4a5f5; /* Change border color on hover */
+}
+
+.project-card img.project-thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.project-card h3 {
+    font-size: 1.4rem; /* Slightly larger font size */
+    margin: 0.8rem 0;
+    color: #ffffff; /* Bright text for contrast */
+    word-wrap: break-word; /* Ensure long words break properly */
+    white-space: normal; /* Allow text to wrap */
+    overflow: visible; /* Ensure text is not cut off */
+}
+
+.project-card p {
+    font-size: 1rem; /* Slightly larger font size */
+    color: #d3d3d3; /* Softer text color */
+    margin: 0.5rem 0;
+    line-height: 1.5; /* Improve readability */
+    word-wrap: break-word; /* Ensure long words break properly */
+    white-space: normal; /* Allow text to wrap to the next line */
+    overflow: visible; /* Ensure text is not cut off */
+}
+
+.project-card a {
+    text-decoration: none;
+    color: #9b59b6; /* Highlighted link color */
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.project-card a:hover {
+    color: #d4a5f5; /* Lighter purple on hover */
 }
 
 /* Thumbnail (Iframe) Styling */
@@ -195,9 +236,9 @@ header .nav-links li a:hover {
     font-size: 1.4rem; /* Slightly larger font size */
     margin: 0.8rem 0;
     color: #ffffff; /* Bright text for contrast */
-    text-overflow: ellipsis; /* Handle long titles */
-    white-space: nowrap;
-    overflow: hidden;
+    word-wrap: break-word; /* Ensure long words break properly */
+    white-space: normal; /* Allow text to wrap */
+    overflow: visible; /* Ensure text is not cut off */
 }
 
 /* Description Styling */
@@ -205,9 +246,10 @@ header .nav-links li a:hover {
     font-size: 1rem; /* Slightly larger font size */
     color: #d3d3d3; /* Softer text color */
     margin: 0.5rem 0;
-    text-overflow: ellipsis; /* Handle long descriptions */
-    white-space: nowrap;
-    overflow: hidden;
+    line-height: 1.5; /* Improve readability */
+    word-wrap: break-word; /* Ensure long words break properly */
+    white-space: normal; /* Allow text to wrap to the next line */
+    overflow: visible; /* Ensure text is not cut off */
 }
 
 /* Link Styling */
@@ -230,6 +272,62 @@ header .nav-links li a:hover {
 
 .hidden {
     display: none;
+}
+
+/* Sway Animation */
+@keyframes sway {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(1deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Optional: Add a subtle grow/shrink effect */
+@keyframes grow-shrink {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Idle Animation for Each Letter */
+.animated-text span {
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Grow/Fade-In Animation */
+.fade-in {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* About Me Section Styling */
@@ -279,6 +377,12 @@ header .nav-links li a:hover {
     color: #ffffff;
     font-weight: bold;
     text-align: center;
+}
+
+.social-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(145deg, #3a3a3a, #4a4a4a); /* Slightly lighter gradient on hover */
 }
 
 .social-tile img {

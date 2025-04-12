@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>			
+   <head>
+    <style>
+	#text {
+		border: 0 none white;
+		overflow: hidden;
+		padding: 0;
+		outline: orange solid .5px;
+		width: 50em;
+		background-color: #D0D0D0;
+	}
+	
+	#output {
+		position: relative;
+		right: 5;
+		top: -145px;
+		border: 0 none white;
+		overflow: hidden;
+		padding: 0;
+		outline: red solid 2.5px;
+		background-color: #D0D0D0;
+	}
+	
+	#debug {
+		position: relative;
+		right: 5;
+		top: -145px;
+		border: 0 none white;
+		overflow: hidden;
+		padding: 0;
+		outline: red solid 2.5px;
+		background-color: #D0D0D0;
+	}
+	#sub {
+		position: relative;
+		left: -24em;
+		top: -50px;
+	}
+	</style>
+    <script src="resizeTextbox.js" type="text/javascript"></script>
+		<body bgcolor = #333333 onload="init();">		
+			<textarea id="text" rows="30"></textarea>
+			<textarea id="output" columns="50" rows="20">Output</textarea>
+			<textarea id="debug" columns="50" rows="10">Debugging</textarea>
+			<input id="sub" type="button" onclick="submit();" value="Compile and Execute"></input>
+			<script src="main.js" type="text/javascript"></script>
+      </body>
+   </head>
+</html>
