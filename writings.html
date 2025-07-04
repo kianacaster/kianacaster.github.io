@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writings - Kian Acaster</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="white-letter-k-md.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Kian Acaster</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="writings.html">Writings</a></li>
+                <li><a href="chess.html">Chess</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="writings" class="section">
+        <div class="container">
+            
+            <div id="writing-list" class="writing-grid"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Kian Acaster. All rights reserved.</p>
+    </footer>
+
+    <script>
+        async function getWritings() {
+            const response = await fetch('posts/');
+            const text = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const links = Array.from(doc.querySelectorAll('a'));
+            const writingList = document.getElementById('writing-list');
+
+            for (const link of links) {
+                if (link.href.endsWith('.md')) {
+                    const postName = link.href.split('/').pop().replace('.md', '');
+                    const title = postName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+                    // Fetch content to get preview
+                    const postResponse = await fetch(`posts/${postName}.md`);
+                    const postContent = await postResponse.text();
+                    const preview = postContent.split('\n').slice(1, 3).join(' ').substring(0, 150) + '...'; // Get first two lines as preview
+
+                    const writingCard = document.createElement('a');
+                    writingCard.href = `post.html?post=${postName}`;
+                    writingCard.classList.add('writing-card');
+                    writingCard.innerHTML = `
+                        <h3>${title}</h3>
+                        <p>${preview}</p>
+                    `;
+                    writingList.appendChild(writingCard);
+                }
+            }
+        }
+
+        getWritings();
+    </script>
+</body>
+</html>

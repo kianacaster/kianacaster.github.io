@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess - Kian Acaster</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="white-letter-k-md.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Kian Acaster</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="writings.html">Writings</a></li>
+                <li><a href="chess.html">Chess</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="chess" class="section">
+        <div class="container">
+            <h2>Lichess Profile</h2>
+            <div id="lichess-profile">
+                <p>Loading Lichess data...</p>
+            </div>
+
+            <h2>Recent Games</h2>
+            <div id="lichess-games">
+                <p>Loading recent games...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Kian Acaster. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const lichessUsername = "therealkd2";
+
+        async function fetchLichessData() {
+            const profileUrl = `https://lichess.org/api/user/${lichessUsername}`;
+            const gamesUrl = `https://lichess.org/api/user/${lichessUsername}/games?max=5&perfType=blitz,rapid,classical&rated=true`;
+
+            try {
+                const [profileResponse, gamesResponse] = await Promise.all([
+                    fetch(profileUrl),
+                    fetch(gamesUrl, { headers: { 'Accept': 'application/x-ndjson' } })
+                ]);
+
+                const profileData = await profileResponse.json();
+                const gamesData = await gamesResponse.text(); // Games API returns NDJSON
+
+                displayLichessProfile(profileData);
+                displayLichessGames(gamesData);
+
+            } catch (error) {
+                console.error("Error fetching Lichess data:", error);
+                document.getElementById("lichess-profile").innerHTML = "<p>Error loading Lichess profile.</p>";
+                document.getElementById("lichess-games").innerHTML = "<p>Error loading recent games.</p>";
+            }
+        }
+
+        function displayLichessProfile(profile) {
+            const profileDiv = document.getElementById("lichess-profile");
+            if (!profile || profile.error) {
+                profileDiv.innerHTML = `<p>Could not load Lichess profile for ${lichessUsername}.</p>`;
+                return;
+            }
+
+            let ratingsHtml = '';
+            for (const perfType in profile.perfs) {
+                const perf = profile.perfs[perfType];
+                if (perf.rating) {
+                    ratingsHtml += `<p><strong>${perfType.charAt(0).toUpperCase() + perfType.slice(1)}:</strong> ${perf.rating} (Peak: ${perf.prov ? 'N/A' : perf.prog})</p>`;
+                }
+            }
+
+            profileDiv.innerHTML = `
+                <h3>${profile.username}</h3>
+                ${ratingsHtml}
+                <p><a href="${profile.url}" target="_blank">View Profile on Lichess</a></p>
+            `;
+        }
+
+        function displayLichessGames(gamesNdjson) {
+            const gamesDiv = document.getElementById("lichess-games");
+            const games = gamesNdjson.trim().split('\n').map(JSON.parse);
+
+            if (games.length === 0) {
+                gamesDiv.innerHTML = "<p>No recent rated games found.</p>";
+                return;
+            }
+
+            let gamesHtml = '<div class="game-list">';
+            games.forEach(game => {
+                const isWin = (game.winner === 'white' && game.players.white.user.name.toLowerCase() === lichessUsername.toLowerCase()) ||
+                              (game.winner === 'black' && game.players.black.user.name.toLowerCase() === lichessUsername.toLowerCase());
+                const result = game.status === 'draw' ? 'Draw' : (isWin ? 'Win' : 'Loss');
+                const opponent = game.players.white.user.name.toLowerCase() === lichessUsername.toLowerCase() ? game.players.black.user.name : game.players.white.user.name;
+                const gameDate = new Date(game.createdAt).toLocaleDateString();
+
+                gamesHtml += `
+                    <div class="game-card ${result.toLowerCase()}">
+                        <p><strong>${game.perf}</strong></p>
+                        <p>${result} vs ${opponent}</p>
+                        <p>${gameDate}</p>
+                        <a href="https://lichess.org/${game.id}" target="_blank">View Game</a>
+                    </div>
+                `;
+            });
+            gamesHtml += '</div>';
+            gamesDiv.innerHTML = gamesHtml;
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchLichessData);
+    </script>
+</body>
+</html>

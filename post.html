@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Kian Acaster</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="white-letter-k-md.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Kian Acaster</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="writings.html">Writings</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="post" class="section">
+        <div class="container">
+            <div id="post-content"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Kian Acaster. All rights reserved.</p>
+    </footer>
+
+    <script src="js/showdown.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const postName = urlParams.get('post');
+
+        async function getPost() {
+            const response = await fetch(`posts/${postName}.md`);
+            const text = await response.text();
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(text);
+            const postContent = document.getElementById('post-content');
+            postContent.innerHTML = html;
+        }
+
+        getPost();
+    </script>
+</body>
+</html>
