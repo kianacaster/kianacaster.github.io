@@ -1,4 +1,3 @@
-
 const repoMapping = {
     "10print": "10PRINT-JS",
     "Bomb%20Dodger": "Bomb-Dodger",
@@ -26,6 +25,77 @@ const repoMapping = {
     "rosepatterns": "RosePatterns"
 };
 
+// Define project categories
+const projectCategories = {
+    "Core CS & Systems": [
+        "C_File_Organizer",
+        "Go_File_Organizer",
+        "Python_File_Organizer",
+        "KeyValue_Store",
+        "Simple_VCS",
+        "Basic_Memory_Allocator",
+        "Simple_FileSystem",
+        "Custom_Data_Structures",
+        "CPU_Scheduler_Simulation",
+        "Basic_Interpreter",
+        "Custom_Shell"
+    ],
+    "Web Development": [
+        // Add your web projects here if any
+    ],
+    "Desktop & CLI Applications": [
+        "CLI_Line_Counter",
+        "Markdown_Converter_V2",
+        "File_Renamer",
+        "Weather_App",
+        "System_Monitor",
+        "Image_Editor"
+    ],
+    "Data Science & Machine Learning": [
+        "Stock_Predictor",
+        "Churn_Prediction",
+        "Sentiment_Analysis"
+    ],
+    "Games & Simulations": [
+        "Conways_Game_of_Life",
+        "TicTacToe_AI",
+        "Snake_Game",
+        "Text_Adventure_Game_V2"
+    ],
+    "Financial Development & Quant": [
+        "Black_Scholes_Option_Pricer",
+        "Monte_Carlo_Option_Pricer",
+        "Portfolio_Optimizer",
+        "Order_Book_Simulation",
+        "Financial_Data_Scraper",
+        "Trading_Strategy_SMA"
+    ],
+    "AI": [
+        "Image_Classifier",
+        "Recommendation_System",
+        "Spam_Classifier",
+        "Digit_Recognizer",
+        "Neural_Network_Scratch",
+        "Text_Summarizer",
+        "Policy_Gradient_RL",
+        "Pathfinding_AI",
+        "Basic_Object_Detection",
+        "Markov_Text_Generator"
+    ],
+    "Cutting Edge": [
+        "Federated_Learning_Sim",
+        "Quantum_Computing_Sim",
+        "Simple_Blockchain",
+        "Edge_Computing_Sim",
+        "XAI_LIME_Concept",
+        "Simple_GAN_Concept",
+        "Simple_GNN_Concept",
+        "XAI_SHAP_Concept",
+        "Digital_Twin_Sim",
+        "Time_Series_Anomaly_Detection"
+    ]
+};
+
 
 const username = "kianacaster";
 
@@ -51,65 +121,123 @@ async function fetchAllRepos(username) {
     return allRepos;
 }
 
-async function fetchAndSortProjects() {
+async function fetchAndCategorizeProjects() {
     const repos = await fetchAllRepos(username);
 
-    const projectsByYear = {};
+    const categorizedProjects = {};
+    const uncategorizedProjects = [];
 
-    repos.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)); // Sort by creation date
+    // Initialize categories
+    for (const category in projectCategories) {
+        categorizedProjects[category] = [];
+    }
+
+    repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // Sort by creation date (newest first)
 
     repos.forEach(repo => {
-        const folderName = Object.keys(repoMapping).find(
-            key => repoMapping[key] === repo.name
-        );
-
         const createdDate = new Date(repo.created_at).toLocaleDateString();
         const lastEdited = new Date(repo.updated_at).toLocaleDateString();
-        const year = new Date(repo.created_at).getFullYear();
 
-        if (!projectsByYear[year]) {
-            projectsByYear[year] = [];
+        let assignedCategory = null;
+        for (const category in projectCategories) {
+            if (projectCategories[category].includes(repo.name)) {
+                assignedCategory = category;
+                break;
+            }
         }
 
-        // Add project card for repos with a corresponding folder
+        const projectData = {
+            repoName: repo.name,
+            createdDate,
+            lastEdited,
+            description: repo.description || "No description available.",
+            githubLink: repo.html_url
+        };
+
+        // Check if a local folder exists for the repo to determine if it has a live site
+        const folderName = Object.keys(repoMapping).find(key => repoMapping[key] === repo.name);
         if (folderName) {
-            projectsByYear[year].push({
-                folderName,
-                repoName: repo.name,
-                createdDate,
-                lastEdited,
-                description: repo.description || "No description available.",
-                thumbnail: `thumbnails/${folderName}.png`,
-                link: `${folderName}/index.html`,
-                githubLink: repo.html_url
-            });
+            projectData.link = `${folderName}/index.html`; // Assuming index.html for local projects
+            projectData.thumbnail = `thumbnails/${folderName}.png`; // Assuming thumbnail exists
         } else {
-            // Add project card for repos without a corresponding folder
-            projectsByYear[year].push({
-                repoName: repo.name,
-                createdDate,
-                lastEdited,
-                description: repo.description || "No description available.",
-                thumbnail: "icons/github.png", // Default thumbnail for GitHub-only projects
-                githubLink: repo.html_url
-            });
+            projectData.thumbnail = "icons/github.png"; // Default thumbnail for GitHub-only projects
+        }
+
+
+        if (assignedCategory) {
+            categorizedProjects[assignedCategory].push(projectData);
+        } else {
+            uncategorizedProjects.push(projectData);
         }
     });
 
-    renderProjects(projectsByYear);
+    renderProjects(categorizedProjects, uncategorizedProjects);
 }
 
-function renderProjects(projectsByYear) {
+function renderProjects(categorizedProjects, uncategorizedProjects) {
     const container = document.getElementById("projects-container");
+    container.innerHTML = ''; // Clear existing content
 
-    Object.keys(projectsByYear).sort((a, b) => b - a).forEach(year => {
-        const yearSection = document.createElement("div");
-        yearSection.classList.add("year-section");
+    // Render categorized projects
+    for (const category in projectCategories) { // Iterate in defined order
+        if (categorizedProjects[category].length > 0) {
+            const categorySection = document.createElement("div");
+            categorySection.classList.add("category-section");
+
+            const header = document.createElement("div");
+            header.classList.add("collapsible");
+            header.innerHTML = `
+                <span>${category}</span>
+                <span class="arrow">&#9660;</span>
+            `;
+            header.addEventListener("click", () => {
+                const projectList = header.nextElementSibling;
+                const arrow = header.querySelector(".arrow");
+
+                if (projectList && arrow) {
+                    projectList.classList.toggle("hidden");
+                    arrow.classList.toggle("rotate");
+                }
+            });
+
+            const projectList = document.createElement("div");
+            projectList.classList.add("project-list", "hidden"); // Start collapsed
+
+            categorizedProjects[category].forEach(project => {
+                const projectCard = document.createElement("div");
+                projectCard.classList.add("project-card");
+
+                const iframeThumbnail = project.link
+                    ? `<iframe src="${project.link}" title="${project.repoName} Live Preview" class="project-iframe"></iframe>`
+                    : `<img src="${project.thumbnail}" alt="${project.repoName} Thumbnail" class="project-thumbnail">`;
+
+                projectCard.innerHTML = `
+                    ${iframeThumbnail}
+                    <h3>${project.repoName}</h3>
+                    <p>${project.description}</p>
+                    <p class="project-date">Created: ${project.createdDate}</p>
+                    <p class="project-date">Last edited: ${project.lastEdited}</p>
+                    ${project.link ? `<a href="${project.link}" target="_blank">View Site</a>` : ""}
+                    <a href="${project.githubLink}" target="_blank" class="github-link">GitHub Repo</a>
+                `;
+                projectList.appendChild(projectCard);
+            });
+
+            categorySection.appendChild(header);
+            categorySection.appendChild(projectList);
+            container.appendChild(categorySection);
+        }
+    }
+
+    // Render uncategorized projects
+    if (uncategorizedProjects.length > 0) {
+        const uncategorizedSection = document.createElement("div");
+        uncategorizedSection.classList.add("category-section");
 
         const header = document.createElement("div");
         header.classList.add("collapsible");
         header.innerHTML = `
-            <span>${year}</span>
+            <span>Uncategorized</span>
             <span class="arrow">&#9660;</span>
         `;
         header.addEventListener("click", () => {
@@ -123,13 +251,12 @@ function renderProjects(projectsByYear) {
         });
 
         const projectList = document.createElement("div");
-        projectList.classList.add("project-list", "hidden"); // Add 'hidden' class to initialize as collapsed
+        projectList.classList.add("project-list", "hidden"); // Start collapsed
 
-        projectsByYear[year].forEach(project => {
+        uncategorizedProjects.forEach(project => {
             const projectCard = document.createElement("div");
             projectCard.classList.add("project-card");
 
-            // Include iframe thumbnail for valid projects with a link
             const iframeThumbnail = project.link
                 ? `<iframe src="${project.link}" title="${project.repoName} Live Preview" class="project-iframe"></iframe>`
                 : `<img src="${project.thumbnail}" alt="${project.repoName} Thumbnail" class="project-thumbnail">`;
@@ -146,13 +273,13 @@ function renderProjects(projectsByYear) {
             projectList.appendChild(projectCard);
         });
 
-        yearSection.appendChild(header);
-        yearSection.appendChild(projectList);
-        container.appendChild(yearSection);
-    });
+        uncategorizedSection.appendChild(header);
+        uncategorizedSection.appendChild(projectList);
+        container.appendChild(uncategorizedSection);
+    }
 }
 
-fetchAndSortProjects();
+fetchAndCategorizeProjects();
 
 async function fetchLatestYouTubeVideo() {
     const youtubeVideoContainer = document.getElementById('youtube-video-container');
@@ -163,6 +290,7 @@ async function fetchLatestYouTubeVideo() {
         const data = await response.json();
 
         if (data.status === 'ok' && data.items.length > 0) {
+            const latestVideo = data.items[0]; // Get the first item
             const videoId = latestVideo.guid.split(':').pop();
             const videoTitle = latestVideo.title;
             const videoLink = latestVideo.link;
