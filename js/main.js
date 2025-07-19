@@ -1,3 +1,4 @@
+
 const repoMapping = {
     "10print": "10PRINT-JS",
     "Bomb%20Dodger": "Bomb-Dodger",
@@ -27,7 +28,7 @@ const repoMapping = {
 
 // Define project categories
 const projectCategories = {
-    "Core CS & Systems": [
+    "Systems": [
         "C_File_Organizer",
         "Go_File_Organizer",
         "Python_File_Organizer",
@@ -35,15 +36,16 @@ const projectCategories = {
         "Simple_VCS",
         "Basic_Memory_Allocator",
         "Simple_FileSystem",
-        "Custom_Data_Structures",
-        "CPU_Scheduler_Simulation",
-        "Basic_Interpreter",
         "Custom_Shell"
     ],
-    "Web Development": [
+    "DSA": [
+        "Custom_Data_Structures",
+        "CPU_Scheduler_Simulation"
+    ],
+    "Web": [
         // Add your web projects here if any
     ],
-    "Desktop & CLI Applications": [
+    "CLI": [
         "CLI_Line_Counter",
         "Markdown_Converter_V2",
         "File_Renamer",
@@ -51,18 +53,7 @@ const projectCategories = {
         "System_Monitor",
         "Image_Editor"
     ],
-    "Data Science & Machine Learning": [
-        "Stock_Predictor",
-        "Churn_Prediction",
-        "Sentiment_Analysis"
-    ],
-    "Games & Simulations": [
-        "Conways_Game_of_Life",
-        "TicTacToe_AI",
-        "Snake_Game",
-        "Text_Adventure_Game_V2"
-    ],
-    "Financial Development & Quant": [
+    "Financial": [
         "Black_Scholes_Option_Pricer",
         "Monte_Carlo_Option_Pricer",
         "Portfolio_Optimizer",
@@ -81,6 +72,12 @@ const projectCategories = {
         "Pathfinding_AI",
         "Basic_Object_Detection",
         "Markov_Text_Generator"
+    ],
+    "Games": [
+        "Conways_Game_of_Life",
+        "TicTacToe_AI",
+        "Snake_Game",
+        "Text_Adventure_Game_V2"
     ],
     "Cutting Edge": [
         "Federated_Learning_Sim",
