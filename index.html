@@ -3,127 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kian Acaster Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Kian Acaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="terminal.css">
     <link rel="icon" href="white-letter-k-md.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Kian Acaster</div>
-            <ul class="nav-links">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="writings.html">Writings</a></li>
-                <li><a href="chess.html">Chess</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="hero" class="section">
-        <div class="hero-content">
-            <h1 class="animated-text">
-                <span>H</span><span>i</span><span>.</span> <span>I</span><span>'</span><span>m</span> <span>K</span><span>i</span><span>a</span><span>n</span><span>.</span>
-            </h1>
-            <p>aka. The second coming of Christ.</p>
-            <a href="#projects" class="btn">Explore My Work</a>
+    <div id="terminal">
+        <div id="output"></div>
+        <div class="input-line">
+            <span class="prompt">></span>
+            <input type="text" id="input" autofocus>
         </div>
-    </section>
-
-    <section id="about" class="section fade-in">
-        <div class="container">
-            <h2>About Me</h2>
-            <p class="animated-text">
-                <span>My journey into computer science began in year four when my brother introduced me to the JavaScript <code>alert()</code> function in an online code sandbox. We spent hours making silly messages pop up on our grandad's laptop, and from that moment, I was hooked. The questions "How does this work?" and "What else can I make it do?" have been constant companions ever since.</span>
-            </p>
-            <p>
-                As a gaming enthusiast, I naturally gravitated toward creating browser-based games like Pong and Snake, which taught me the fundamentals of programming and game logic. Over time, I transitioned from using libraries like 'p5.js' to writing native JavaScript, exploring graphical projects and mathematical visualizations. 
-            </p>
-            <p>
-                I am currently pursuing a degree in Computing Science at the University of Glasgow, where I am also studying Mathematics and Statistics. My academic journey has been shaped by a strong foundation in STEM subjects, including my prior GCSE level education at St. Peter's School in York, followed by Access to Higher Education courses in Maths and Physics provided by the University of Glasgow. Alongside my studies, I enjoy exploring new technologies, solving coding challenges, and working on creative projects that combine my love for problem-solving with my passion for design and innovation.
-            </p>
-            <div class="social-links">
-                <a href="https://youtube.com/user/zomarea225" target="_blank" class="social-tile youtube">
-                    <img src="icons/youtube.png" alt="YouTube">
-                    <span>YouTube</span>
-                </a>
-                <a href="https://twitch.tv/xkd2" target="_blank" class="social-tile twitch">
-                    <img src="icons/twitch.png" alt="Twitch">
-                    <span>Twitch</span>
-                </a>
-                <a href="https://lichess.org/@/therealKD2" target="_blank" class="social-tile lichess">
-                    <img src="icons/chess.png" alt="Lichess">
-                    <span>Lichess</span>
-                </a>
-                <a href="https://twitter.com/" target="_blank" class="social-tile twitter">
-                    <img src="icons/twitter-alt-square.png" alt="X (Twitter)">
-                    <span>X (Twitter)</span>
-                </a>
-                <a href="https://linkedin.com/" target="_blank" class="social-tile linkedin">
-                    <img src="icons/linkedin.png" alt="LinkedIn">
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://discord.gg/VVTK5krf" target="_blank" class="social-tile discord">
-                    <img src="icons/discord.png" alt="Discord">
-                    <span>Discord</span>
-                </a>
-                <a href="https://github.com/kianacaster" target="_blank" class="social-tile github">
-                    <img src="icons/github.png" alt="GitHub">
-                    <span>GitHub</span>
-                </a>
-                <a href="https://steamcommunity.com/id/xKD2/" target="_blank" class="social-tile steam">
-                    <img src="icons/steam.png" alt="Steam">
-                    <span>Steam</span>
-                </a>
-                <a href="https://www.instagram.com/kianacaster/" target="_blank" class="social-tile instagram">
-                    <img src="icons/instagram.png" alt="Instagram">
-                    <span>Instagram</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="latest-video" class="section fade-in">
-        <div class="container">
-            <h2>Latest Video</h2>
-            <div id="youtube-video-container">
-                <!-- YouTube video will be embedded here -->
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <div class="container">
-            <h2>My Projects</h2>
-            <div id="projects-container">
-                <!-- Collapsible sections for each year will be dynamically added here -->
-            </div>
-        </div>
-    </section>
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="_replyto" required>
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Kian Acaster. All rights reserved.</p>
-    </footer>
-
+    </div>
+    <script src="js/showdown.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
